@@ -24,6 +24,7 @@ Examples:
 
 [dewtube:/dir/myvideo.flv] 
 
+*ATTENTION* The DewTube should be able to read a remote video, however, for now, this doesn't work with Internet Explorer!
 
 Configurable parameters : 
 

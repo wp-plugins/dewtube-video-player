@@ -126,7 +126,7 @@ Just copy dewtube code and paste it into your post or comment.</p>
 	 </div>
 
 	</div>
-<h5>dewtube plugin by Jarod_ (original idea from <a href="http://www.royakhosravi.com/">Roya Khosravi</a>)</h5>
+<h5>dewtube plugin by Jarod_ (inspired by the <a href="http://wordpress.org/extend/plugins/dewplayer-flash-mp3-player/">Roya Khosravi's plugin</a>)</h5>
 </div>
 END;
 }

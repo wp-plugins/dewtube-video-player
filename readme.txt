@@ -4,7 +4,7 @@ Donate link: http://blog.lagon-bleu.org/wordpress/plugin-wp/
 Tags: Post, admin, posts, plugin, page, Dewtube, flash player, video player, Dew player, Dew
 Requires at least: 2.0.2
 Tested up to: 2.6.3
-Stable tag: 1.0
+Stable tag: 1.0.1
 
 DewTube Wordpress plugin - Insert DewTube (Flash Video Player) in posts/pages.
 

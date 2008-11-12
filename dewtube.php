@@ -4,10 +4,10 @@ Plugin Name: DewTube Player Video
 Plugin URI: http://blog.lagon-bleu.org/wordpress/plugin-wp/
 Description:  Insert Dewtube (free video player) in posts & comments.
 Author: Jarod_
-Version: 1.0
+Version: 1.0.1
 Comments: based on the dewtube plugin of Roya Khosravi (http://wordpress.org/extend/plugins/dewtube-flash-mp3-player/)
 Updates:
--none
+- change the function to find the correct [dewtube] block
 
 To-Doo: 
 -none
@@ -171,11 +171,10 @@ function dewtube_tag($files) {
 
 function dewtube_check($the_content) {
 	if(strpos($the_content, "[dewtube:")!==FALSE) {
-		
-		preg_match_all('/(?<name>\w+):([^\])]+)/', $the_content, $matches, PREG_SET_ORDER); 
+
+		preg_match_all('/\[(?<name>\w+):([^\])]+)/', $the_content, $matches, PREG_SET_ORDER); 
 		foreach($matches as $match) { 
-			$the_content = preg_replace("/(?<name>\w+):([^\])]+)/", dewtube_tag($match[2]), $the_content);
-		        $the_content=str_replace(array('[', ']'), '', $the_content);
+		$the_content = preg_replace("/\[(?<name>\w+):([^\])]+)\]/", dewtube_tag($match[2]), $the_content,1);
 		}
 		
 	}

@@ -4,16 +4,17 @@ Plugin Name: DewTube Player Video
 Plugin URI: http://blog.lagon-bleu.org/wordpress/plugin-wp/
 Description:  Insert Dewtube (free video player) in posts & comments.
 Author: Jarod_
-Version: 1.0.1
+Version: 1.1.0
 Comments: based on the dewtube plugin of Roya Khosravi (http://wordpress.org/extend/plugins/dewtube-flash-mp3-player/)
 Updates:
-- change the function to find the correct [dewtube] block
+- (1.1.0) add the possibility to add a customized width and height for each video
+- (1.0.1) change the function to find the correct [dewtube] block
 
 To-Doo: 
 -none
 */
 
-$dewtube_localversion="1.0";
+$dewtube_localversion="1.1.0";
 $wp_dewp_plugin_url = trailingslashit( get_bloginfo('wpurl') ).PLUGINDIR.'/'. dirname( plugin_basename(__FILE__) );
  // Admin Panel   
 function dewtube_add_pages()
@@ -97,9 +98,14 @@ Just copy dewtube code and paste it into your post or comment.</p>
 <p>Usage : <strong>[dewtube:</strong>Path to your video file on local<strong>]</strong></p>
 <p><font color="#FF0000">Attention</font> - you can also use a remote video, however, so far, the DewTube could be unable to load the video with Internet Explorer</p>
 
-<p>Examples: <br>
+<p>Example: <br>
 <strong>[dewtube:</strong>/myrep/myvideo.flv<strong>]</strong><br>
 </p>
+
+<p>You can <strong>customize</strong> the video width and height in adding ",width,heigh" to the address of the video.<br />
+For example if we want 480px as width and 320px as height: <strong>[dewtube:</strong>/myrep/myvideo.flv,480,320<strong>]</strong><br>
+</p>
+<br />
 
 <h3>Options</h3>
 <p><strong>dewtube settings</strong></p>
@@ -133,7 +139,7 @@ END;
 // Add Options Page
 add_action('admin_menu', 'dewtube_add_pages');
 
-function dewtube_tag($files) {
+function dewtube_tag($param) {
 
 	$dewwidth = get_option('dewtube_dewwidth');
 	$dewheight = get_option('dewtube_dewheight');
@@ -143,6 +149,13 @@ function dewtube_tag($files) {
 	$player .= 'dewtube.swf';
 	$width=$dewwidth;
 	$height=$dewheight;
+	
+	$params = split(",", $param);
+	if (sizeof($params) == 3) {
+  	$param = $params[0];
+  	$width = $params[1];
+  	$height = $params[2];
+	}
 	
 /*	$add_me_1='';
 	$add_me_2='';
@@ -158,11 +171,11 @@ function dewtube_tag($files) {
 	$dewp_tag .= '" /></object>';
 	$dewp_tag .= '<!-- dewtube End-->';	*/
   
-	if($dewstart==1) $files .= '&amp;autostart='.$dewstart;
+	if($dewstart==1) $param .= '&amp;autostart='.$dewstart;
 	$dewp_tag = '<!-- dewtube Begin-->';
 	$dewp_tag  = '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" ';
 	$dewp_tag .= 'width="'.$width.'" height="'.$height.'" id="dewtube" align="middle"><param name="allowScriptAccess" value="always" /><param name="allowFullScreen" value="true" />';
-	$dewp_tag .= '<param name="movie" value="'.$player.'?movie='.$files.'" /><param name="quality" value="high" /><param name="bgcolor" value="#000000" /><embed src="'.$player.'?movie='.$files.'" allowFullScreen="true" quality="high" bgcolor="#000000" ';
+	$dewp_tag .= '<param name="movie" value="'.$player.'?movie='.$files.'" /><param name="quality" value="high" /><param name="bgcolor" value="#000000" /><embed src="'.$player.'?movie='.$param.'" allowFullScreen="true" quality="high" bgcolor="#000000" ';
 	$dewp_tag .= 'width="'.$width.'" height="'.$height.'" name="dewtube" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer"></embed></object>';
 	$dewp_tag .= '<!-- dewtube End-->';	
 	return $dewp_tag;

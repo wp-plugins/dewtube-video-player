@@ -4,7 +4,7 @@ Donate link: http://blog.lagon-bleu.org/wordpress/plugin-wp/
 Tags: Post, admin, posts, plugin, page, Dewtube, flash player, video player, Dew player, Dew
 Requires at least: 2.0.2
 Tested up to: 2.6.3
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 
 DewTube Wordpress plugin - Insert DewTube (Flash Video Player) in posts/pages.
 
@@ -29,10 +29,11 @@ Examples:
 Configurable parameters : 
 
 Width, Height and Auto start.
+The width and height can also be defined for each video like that: [dewtube:/dir/myvideo.flv,width,height]
 
 Plugin Version : 
 
-1.0 for DewTube 1.0 beta (http://www.alsacreations.fr/dewtube)
+1.1.0 for DewTube 1.0 beta (http://www.alsacreations.fr/dewtube)
 
 == Installation ==
 
